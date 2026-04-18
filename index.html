@@ -177,8 +177,8 @@
 
     .hero__grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 42px;
       align-items: center;
     }
 
@@ -273,7 +273,7 @@
 
     .hero__shape {
       position: absolute;
-      inset: 6% 0 0 14%;
+      inset: 4% 0 0 8%;
       border-radius: 38px;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.34)),
@@ -293,21 +293,6 @@
       filter: saturate(0.84) contrast(1.02);
     }
 
-    .hero__card {
-      position: absolute;
-      backdrop-filter: blur(16px);
-      background: rgba(244, 240, 232, 0.78);
-      border: 1px solid rgba(35, 35, 35, 0.08);
-      box-shadow: 0 14px 50px rgba(35, 35, 35, 0.10);
-      border-radius: 24px;
-      padding: 20px;
-      max-width: 280px;
-    }
-
-    .hero__card--top { top: 2%; left: 0; }
-    .hero__card--bottom { right: 4%; bottom: 4%; }
-
-    .hero__card-label,
     .section-kicker,
     .scenario__number,
     .practice-card__top,
@@ -317,20 +302,6 @@
       text-transform: uppercase;
     }
 
-    .hero__card-label {
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .hero__card-title {
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.85rem;
-      line-height: 0.98;
-      margin: 0 0 12px;
-    }
-
-    .hero__card p,
-    .section-text,
     .scenario p,
     .format p,
     .practice-card p,
@@ -345,10 +316,7 @@
     section { padding: 108px 0; }
 
     .section-head {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-      align-items: end;
+      display: block;
       margin-bottom: 34px;
     }
 
@@ -367,11 +335,6 @@
     .section-title {
       font-size: clamp(2rem, 3.5vw, 3.5rem);
       max-width: 16ch;
-    }
-
-    .section-text {
-      font-size: 1.04rem;
-      max-width: 34rem;
     }
 
     .section--soft {
@@ -703,7 +666,6 @@
       .brand__name { font-size: 1.7rem; }
       .hero { padding-top: 16px; }
       .hero__visual { min-height: 420px; }
-      .hero__card { position: static; max-width: none; margin-top: 12px; }
       .hero__shape { position: relative; inset: auto; min-height: 340px; }
       .step { grid-template-columns: 1fr; }
       .about__facts,
@@ -962,16 +924,6 @@
           <div class="hero__shape">
             <img class="hero__image" src="https://static.tildacdn.pub/tild3636-3536-4630-a530-663231626561/IMG_2277_1_1.jpg" alt="Портрет Всеволода Горбунова">
           </div>
-          <div class="hero__card hero__card--top">
-            <div class="hero__card-label">Формат работы</div>
-            <h2 class="hero__card-title">От одной претензии до ведения спора под ключ.</h2>
-            <p>Точечная помощь, когда нужен один шаг, и полноценное сопровождение, когда задача больше одного документа.</p>
-          </div>
-          <div class="hero__card hero__card--bottom">
-            <div class="hero__card-label">Подход</div>
-            <h2 class="hero__card-title">Спокойная личная практика без лишнего пафоса.</h2>
-            <p>Не “юридическая компания вообще”, а конкретный человек, который разбирает вопрос по делу.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -992,9 +944,6 @@
             <p class="section-kicker">Ситуации входа</p>
             <h2 class="section-title">С какими вопросами обращаются</h2>
           </div>
-          <p class="section-text">
-            Здесь не сухой каталог услуг. Человек должен за несколько секунд узнать свою проблему и понять, что с ней можно прийти именно сюда.
-          </p>
         </div>
         <div class="scenarios">
           <article class="scenario reveal">
@@ -1038,9 +987,6 @@
             <p class="section-kicker">Форматы работы</p>
             <h2 class="section-title">Как можно работать</h2>
           </div>
-          <p class="section-text">
-            У Севы сильная сторона в том, что к нему можно прийти и за точечной юридической помощью, и за полным сопровождением дела.
-          </p>
         </div>
         <div class="formats">
           <article class="format reveal">
@@ -1078,9 +1024,6 @@
             <p class="section-kicker">Практика</p>
             <h2 class="section-title">Основные направления практики</h2>
           </div>
-          <p class="section-text">
-            Понятные направления, с которыми чаще всего приходят за консультацией, документами или полным сопровождением.
-          </p>
         </div>
         <div class="practice-grid">
           <article class="practice-card reveal">
@@ -1170,9 +1113,6 @@
             <p class="section-kicker">О практике</p>
             <h2 class="section-title">О практике</h2>
           </div>
-          <p class="section-text">
-            Частная юридическая практика, в которой можно начать с одного вопроса, документа или полноценного сопровождения спора.
-          </p>
         </div>
         <div class="about">
           <div class="about__portrait reveal" aria-hidden="true"></div>
@@ -1214,9 +1154,6 @@
             <p class="section-kicker">Разборы</p>
             <h2 class="section-title">Примеры ситуаций</h2>
           </div>
-          <p class="section-text">
-            Здесь можно показать типовые вопросы, с которыми обычно обращаются за помощью.
-          </p>
         </div>
         <div class="cases">
           <article class="case reveal">
@@ -1245,9 +1182,6 @@
             <p class="section-kicker">FAQ</p>
             <h2 class="section-title">Частые вопросы</h2>
           </div>
-          <p class="section-text">
-            Короткие ответы на вопросы, которые обычно возникают до первого обращения.
-          </p>
         </div>
         <div class="faq">
           <details class="reveal">

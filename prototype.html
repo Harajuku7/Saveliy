@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Прототип лендинга для Всеволода Горбунова</title>
+  <meta name="description" content="Визуальный прототип лендинга частной юридической практики Всеволода Горбунова.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f0e8;
+      --surface: rgba(255, 255, 255, 0.42);
+      --surface-strong: rgba(255, 255, 255, 0.64);
+      --text: #232323;
+      --muted: #6d675f;
+      --line: rgba(35, 35, 35, 0.12);
+      --olive: #5c6652;
+      --accent: #a65a43;
+      --accent-dark: #8f4632;
+      --shadow: 0 18px 60px rgba(35, 35, 35, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1240px;
+      --header: 88px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Onest", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(166, 90, 67, 0.13), transparent 36%),
+        radial-gradient(circle at 85% 18%, rgba(92, 102, 82, 0.10), transparent 24%),
+        linear-gradient(180deg, #f7f3ec 0%, #f0eadf 100%);
+      line-height: 1.45;
+    }
+
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(244, 240, 232, 0.74);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .site-header.is-scrolled {
+      border-color: var(--line);
+      background: rgba(244, 240, 232, 0.88);
+    }
+
+    .nav {
+      min-height: var(--header);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand__name {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2rem;
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+    }
+
+    .brand__tag {
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .nav__links a:hover,
+    .nav__links a:focus-visible { color: var(--text); }
+
+    .nav__cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+    }
+
+    .nav__cta {
+      padding: 14px 22px;
+      border: 1px solid rgba(166, 90, 67, 0.18);
+      background: var(--accent);
+      color: #fffaf7;
+      box-shadow: 0 10px 24px rgba(166, 90, 67, 0.18);
+    }
+
+    .nav__cta:hover,
+    .nav__cta:focus-visible,
+    .button:hover,
+    .button:focus-visible {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    main { overflow: clip; }
+
+    .hero {
+      min-height: calc(100svh - var(--header));
+      display: grid;
+      align-items: center;
+      padding: 32px 0 56px;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--olive);
+      flex: 0 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(3rem, 7vw, 6.15rem);
+      line-height: 0.93;
+      max-width: 10ch;
+      letter-spacing: -0.02em;
+    }
+
+    .hero__lead {
+      margin: 22px 0 0;
+      max-width: 37rem;
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+      color: var(--muted);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button {
+      min-height: 54px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      background: var(--accent);
+      color: #fffaf7;
+    }
+
+    .button--ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(35, 35, 35, 0.14);
+    }
+
+    .button--ghost:hover,
+    .button--ghost:focus-visible {
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--text);
+    }
+
+    .hero__meta {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 760px;
+    }
+
+    .hero__pill {
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .hero__visual {
+      position: relative;
+      min-height: 680px;
+    }
+
+    .hero__shape {
+      position: absolute;
+      inset: 6% 0 0 14%;
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.34)),
+        linear-gradient(180deg, rgba(92, 102, 82, 0.06), rgba(166, 90, 67, 0.10));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      overflow: hidden;
+    }
+
+    .hero__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: saturate(0.84) contrast(1.02);
+    }
+
+    .hero__card {
+      position: absolute;
+      backdrop-filter: blur(16px);
+      background: rgba(244, 240, 232, 0.78);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      box-shadow: 0 14px 50px rgba(35, 35, 35, 0.10);
+      border-radius: 24px;
+      padding: 20px;
+      max-width: 280px;
+    }
+
+    .hero__card--top { top: 2%; left: 0; }
+    .hero__card--bottom { right: 4%; bottom: 4%; }
+
+    .hero__card-label,
+    .section-kicker,
+    .scenario__number,
+    .practice-card__top,
+    .case__label {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero__card-label {
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .hero__card-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.85rem;
+      line-height: 0.98;
+      margin: 0 0 12px;
+    }
+
+    .hero__card p,
+    .section-text,
+    .scenario p,
+    .format p,
+    .practice-card p,
+    .about__facts p,
+    .case p,
+    .faq p,
+    .footer-note {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    section { padding: 108px 0; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--accent);
+    }
+
+    .section-title,
+    .final-cta h2 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      line-height: 0.95;
+    }
+
+    .section-title {
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      max-width: 11ch;
+    }
+
+    .section-text {
+      font-size: 1.04rem;
+      max-width: 34rem;
+    }
+
+    .section--soft {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.16));
+    }
+
+    .scenarios,
+    .formats,
+    .practice-grid,
+    .cases {
+      display: grid;
+      gap: 16px;
+    }
+
+    .scenarios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .formats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .practice-grid,
+    .cases { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .scenario,
+    .practice-card,
+    .case,
+    .faq details {
+      background: var(--surface);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      border-radius: var(--radius-lg);
+    }
+
+    .scenario,
+    .practice-card { padding: 24px; }
+
+    .scenario {
+      box-shadow: 0 8px 24px rgba(35, 35, 35, 0.04);
+      transition: transform 0.24s ease, background 0.24s ease;
+    }
+
+    .scenario:hover {
+      transform: translateY(-3px);
+      background: var(--surface-strong);
+    }
+
+    .scenario__number,
+    .practice-card__top,
+    .case__label { color: var(--accent); margin-bottom: 14px; }
+
+    .scenario h3,
+    .format h3,
+    .practice-card h3,
+    .about__facts h3,
+    .case h3,
+    .faq details summary {
+      margin: 0 0 10px;
+      font-size: 1.24rem;
+      line-height: 1.1;
+      font-weight: 600;
+    }
+
+    .format {
+      padding: 30px;
+      border-radius: calc(var(--radius-lg) + 2px);
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      box-shadow: var(--shadow);
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .format__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--olive);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+
+    .format__label::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .format ul {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .format li {
+      padding-top: 12px;
+      border-top: 1px solid rgba(35, 35, 35, 0.08);
+      color: var(--muted);
+    }
+
+    .practice-card { min-height: 220px; }
+    .practice-card__top { margin-bottom: 40px; }
+
+    .process {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .process__aside {
+      position: sticky;
+      top: calc(var(--header) + 18px);
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: rgba(35, 35, 35, 0.94);
+      color: #f8f4ec;
+      box-shadow: var(--shadow);
+    }
+
+    .process__aside p {
+      color: rgba(248, 244, 236, 0.72);
+      margin: 14px 0 0;
+    }
+
+    .process__list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 18px;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.50);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+    }
+
+    .step__index {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(166, 90, 67, 0.12);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .about__portrait,
+    .about__facts,
+    .final-cta {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      overflow: hidden;
+    }
+
+    .about__portrait {
+      min-height: 620px;
+      background:
+        linear-gradient(180deg, rgba(244, 240, 232, 0.02), rgba(35, 35, 35, 0.10)),
+        url("https://static.tildacdn.pub/tild3636-3536-4630-a530-663231626561/IMG_2277_1_1.jpg") center 18% / cover no-repeat;
+      box-shadow: var(--shadow);
+    }
+
+    .about__facts {
+      padding: 34px;
+      background: rgba(255, 255, 255, 0.54);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .about__fact {
+      padding-top: 14px;
+      border-top: 1px solid rgba(35, 35, 35, 0.08);
+    }
+
+    .about__fact strong {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .case { padding: 26px; }
+
+    .faq { display: grid; gap: 12px; }
+
+    .faq details {
+      padding: 0 22px;
+      border-radius: var(--radius-xl);
+    }
+
+    .faq details[open] { background: rgba(255, 255, 255, 0.72); }
+
+    .faq details summary {
+      list-style: none;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      cursor: pointer;
+    }
+
+    .faq details summary::-webkit-details-marker { display: none; }
+
+    .faq details summary::after {
+      content: "+";
+      font-size: 1.7rem;
+      line-height: 1;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { padding: 0 0 24px; max-width: 50rem; }
+
+    .final-cta {
+      padding: 42px;
+      background:
+        radial-gradient(circle at top right, rgba(166, 90, 67, 0.14), transparent 26%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58));
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta__grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2.3rem, 4vw, 4.3rem);
+      max-width: 12ch;
+    }
+
+    .final-cta p { margin: 16px 0 0; max-width: 36rem; }
+
+    .final-cta__actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .site-footer {
+      padding: 36px 0 56px;
+      color: var(--muted);
+    }
+
+    .site-footer__row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(35, 35, 35, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1120px) {
+      .hero__grid,
+      .section-head,
+      .process,
+      .about,
+      .final-cta__grid { grid-template-columns: 1fr; }
+
+      .hero__visual { order: -1; min-height: 580px; }
+      .practice-grid,
+      .cases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process__aside { position: static; }
+      .final-cta__actions { justify-content: flex-start; }
+    }
+
+    @media (max-width: 820px) {
+      :root { --header: 76px; }
+      .nav { min-height: var(--header); }
+      .nav__links { display: none; }
+      .hero__meta,
+      .scenarios,
+      .formats,
+      .practice-grid,
+      .about__grid,
+      .cases { grid-template-columns: 1fr; }
+      .hero__visual { min-height: 500px; }
+      .hero__shape { inset: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(calc(100% - 24px), var(--max)); }
+      section { padding: 76px 0; }
+      .brand__name { font-size: 1.7rem; }
+      .nav__cta { padding: 12px 16px; }
+      .hero { padding-top: 16px; }
+      .hero__visual { min-height: 420px; }
+      .hero__card { position: static; max-width: none; margin-top: 12px; }
+      .hero__shape { position: relative; inset: auto; min-height: 340px; }
+      .step { grid-template-columns: 1fr; }
+      .about__facts,
+      .final-cta { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="На главный экран">
+        <span class="brand__name">Всеволод Горбунов</span>
+        <span class="brand__tag">Частная юридическая практика</span>
+      </a>
+      <nav class="nav__links" aria-label="Основная навигация">
+        <a href="#situations">Ситуации</a>
+        <a href="#formats">Форматы</a>
+        <a href="#practice">Практика</a>
+        <a href="#about">О практике</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="nav__cta" href="#final">Обсудить ситуацию</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero__grid">
+        <div class="reveal is-visible">
+          <div class="eyebrow">Гражданские, имущественные и потребительские споры</div>
+          <h1>Юрист для ситуаций, где нужен не шум, а ясный план действий.</h1>
+          <p class="hero__lead">
+            Споры по договорам, имуществу, приставам, ДТП, земле и недвижимости.
+            От консультации и претензии до полного ведения дела.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="#final">Разобрать ситуацию</a>
+            <a class="button button--ghost" href="#practice">Посмотреть направления практики</a>
+          </div>
+          <div class="hero__meta">
+            <div class="hero__pill">Можно прийти и с одной задачей, и с полноценным спором.</div>
+            <div class="hero__pill">Работаю лично, без ощущения “конвейера”.</div>
+            <div class="hero__pill">Сначала оцениваю ситуацию, потом предлагаю шаги.</div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal is-visible">
+          <div class="hero__shape">
+            <img class="hero__image" src="https://static.tildacdn.pub/tild3636-3536-4630-a530-663231626561/IMG_2277_1_1.jpg" alt="Портрет Всеволода Горбунова">
+          </div>
+          <div class="hero__card hero__card--top">
+            <div class="hero__card-label">Формат работы</div>
+            <h2 class="hero__card-title">От одного документа до ведения дела под ключ.</h2>
+            <p>Сайт не про “широкий спектр услуг”, а про понятный вход в реальную юридическую задачу.</p>
+          </div>
+          <div class="hero__card hero__card--bottom">
+            <div class="hero__card-label">Подход</div>
+            <h2 class="hero__card-title">Личная практика без лишнего пафоса.</h2>
+            <p>Статус строится не на черно-золотых символах, а на ясности, структуре и спокойной уверенности.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--soft" id="situations">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Ситуации входа</p>
+            <h2 class="section-title">С чем к нему приходят на практике</h2>
+          </div>
+          <p class="section-text">
+            Здесь не сухой каталог услуг. Человек должен за несколько секунд узнать свою проблему и понять, что с ней можно прийти именно сюда.
+          </p>
+        </div>
+        <div class="scenarios">
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 01</div>
+            <h3>Нужно понять, что делать и есть ли перспектива</h3>
+            <p>Консультация, второе мнение, оценка ситуации, проверка позиции другого юриста.</p>
+          </article>
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 02</div>
+            <h3>Нужен один конкретный юридический шаг</h3>
+            <p>Претензия, жалоба, иск, договор, правовая позиция, проверка документов.</p>
+          </article>
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 03</div>
+            <h3>Возник спор по договору, товару или услуге</h3>
+            <p>Когда нужно вернуть деньги, защититься от требований или довести конфликт до понятного результата.</p>
+          </article>
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 04</div>
+            <h3>Нужно разобраться с ДТП, выплатой или постановлением</h3>
+            <p>ОСАГО, КАСКО, страховые выплаты, оспаривание административных решений.</p>
+          </article>
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 05</div>
+            <h3>Есть проблема с приставами, участком, квартирой или сделкой</h3>
+            <p>Арест, списание, ограничения, оформление прав, сопровождение сделки или имущественный спор.</p>
+          </article>
+          <article class="scenario reveal">
+            <div class="scenario__number">Сценарий 06</div>
+            <h3>Нужно не действие, а полноценное ведение дела</h3>
+            <p>Когда вопрос нельзя закрыть одной бумагой и нужен маршрут от проблемы к результату.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="formats">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Форматы работы</p>
+            <h2 class="section-title">Два понятных входа вместо размытого “спектра услуг”</h2>
+          </div>
+          <p class="section-text">
+            У Севы сильная сторона в том, что к нему можно прийти и за точечной юридической помощью, и за полным сопровождением дела.
+          </p>
+        </div>
+        <div class="formats">
+          <article class="format reveal">
+            <div>
+              <div class="format__label">Разовая помощь</div>
+              <h3>Когда нужно одно конкретное действие</h3>
+              <p>Подходит, если нужен один документ, один разбор или один аккуратный юридический шаг без полного сопровождения.</p>
+            </div>
+            <ul>
+              <li>Консультация и второе мнение</li>
+              <li>Претензия, жалоба, иск, договор</li>
+              <li>Проверка документов и позиции</li>
+            </ul>
+          </article>
+          <article class="format reveal">
+            <div>
+              <div class="format__label">Ведение дела</div>
+              <h3>Когда спор нужно довести до результата</h3>
+              <p>Подходит, если задача не решается одной бумагой, а требует последовательной работы, стратегии и сопровождения.</p>
+            </div>
+            <ul>
+              <li>Споры по договорам и услугам</li>
+              <li>Проблемы с приставами, ДТП, землей и недвижимостью</li>
+              <li>Комплексное сопровождение по делу</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--soft" id="practice">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Практика</p>
+            <h2 class="section-title">Основные направления без воды и лишних обещаний</h2>
+          </div>
+          <p class="section-text">
+            Этот блок показывает, что перед клиентом не “юрист по всему подряд”, а частная практика с понятными границами и реальными рабочими темами.
+          </p>
+        </div>
+        <div class="practice-grid">
+          <article class="practice-card reveal">
+            <div class="practice-card__top">01</div>
+            <h3>Договорные споры</h3>
+            <p>Аренда, купля-продажа, поставка, хранение и другие обязательства, где на кону деньги и сроки.</p>
+          </article>
+          <article class="practice-card reveal">
+            <div class="practice-card__top">02</div>
+            <h3>Потребительские споры</h3>
+            <p>Некачественный товар или услуга, возврат денег, претензии и защита позиции по спору.</p>
+          </article>
+          <article class="practice-card reveal">
+            <div class="practice-card__top">03</div>
+            <h3>ДТП и страховые вопросы</h3>
+            <p>ОСАГО, КАСКО, заниженные выплаты, постановления и административные решения.</p>
+          </article>
+          <article class="practice-card reveal">
+            <div class="practice-card__top">04</div>
+            <h3>Споры с приставами</h3>
+            <p>Аресты, списания, ограничения, жалобы и обжалование действий ФССП.</p>
+          </article>
+          <article class="practice-card reveal">
+            <div class="practice-card__top">05</div>
+            <h3>Земельные вопросы</h3>
+            <p>Границы, оформление прав, изменение статуса участка, выдел, раздел, объединение.</p>
+          </article>
+          <article class="practice-card reveal">
+            <div class="practice-card__top">06</div>
+            <h3>Недвижимость и сделки</h3>
+            <p>Проверка объекта, сопровождение сделки, оформление собственности и имущественные споры.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="process">
+      <div class="shell process">
+        <aside class="process__aside reveal">
+          <p class="section-kicker" style="color:#d3c8ba; margin-bottom: 12px;">Процесс</p>
+          <h2 class="section-title" style="max-width: 10ch; color:#f8f4ec;">Тревожную услугу нужно сделать понятной.</h2>
+          <p>Юридическая работа пугает не сложностью закона, а неизвестностью. Поэтому на сайте важно показать не только “что делаю”, но и как именно это происходит.</p>
+        </aside>
+        <div class="process__list">
+          <article class="step reveal">
+            <div class="step__index">01</div>
+            <div>
+              <h3>Вы описываете ситуацию</h3>
+              <p>Коротко, по-человечески, без попытки самим разложить все “по-юридически”.</p>
+            </div>
+          </article>
+          <article class="step reveal">
+            <div class="step__index">02</div>
+            <div>
+              <h3>Я смотрю факты и документы</h3>
+              <p>Сначала разбор того, что реально происходит, а не преждевременные обещания.</p>
+            </div>
+          </article>
+          <article class="step reveal">
+            <div class="step__index">03</div>
+            <div>
+              <h3>Предлагаю формат работы</h3>
+              <p>Либо точечная задача, либо последовательное ведение дела, если вопрос шире одного документа.</p>
+            </div>
+          </article>
+          <article class="step reveal">
+            <div class="step__index">04</div>
+            <div>
+              <h3>Делаем следующий нужный шаг</h3>
+              <p>Претензия, жалоба, иск, проверка сделки, обжалование действий, переговорная позиция.</p>
+            </div>
+          </article>
+          <article class="step reveal">
+            <div class="step__index">05</div>
+            <div>
+              <h3>Двигаемся до результата</h3>
+              <p>Когда вопрос комплексный, задача сайта — показать, что человек может остаться не наедине со спором.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--soft" id="about">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">О практике</p>
+            <h2 class="section-title">Личный, спокойный и взрослый образ вместо безликой “юридической компании”</h2>
+          </div>
+          <p class="section-text">
+            Люди выбирают не просто услугу, а конкретного человека, которому можно доверить конфликт, документы, имущество и сложный разговор с системой.
+          </p>
+        </div>
+        <div class="about">
+          <div class="about__portrait reveal" aria-hidden="true"></div>
+          <div class="about__facts reveal">
+            <div>
+              <h3>Всеволод Горбунов</h3>
+              <p>
+                Частная юридическая практика по гражданским, имущественным и потребительским вопросам.
+                Сайт показывает не выдуманный “бренд”, а человека, который лично разбирает спор и помогает выбрать рабочий путь.
+              </p>
+            </div>
+            <div class="about__grid">
+              <div class="about__fact">
+                <strong>Лично ведет работу</strong>
+                <p>Без ощущения конвейера и передачи дела “внутри команды”.</p>
+              </div>
+              <div class="about__fact">
+                <strong>Говорит по делу</strong>
+                <p>Сначала оценивает реальную картину, потом предлагает действия.</p>
+              </div>
+              <div class="about__fact">
+                <strong>Подходит и для малого запроса</strong>
+                <p>Не нужно приходить только с большим судебным процессом.</p>
+              </div>
+              <div class="about__fact">
+                <strong>Подходит и для сложного спора</strong>
+                <p>Если вопрос требует стратегии и сопровождения, это тоже его формат.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Разборы</p>
+            <h2 class="section-title">Кейсы на сайте лучше заменяют любые громкие обещания</h2>
+          </div>
+          <p class="section-text">
+            Пока это демонстрационные тексты. Когда будут реальные кейсы, их стоит подставить сюда почти в таком же формате: проблема, действия, результат.
+          </p>
+        </div>
+        <div class="cases">
+          <article class="case reveal">
+            <div class="case__label">Договорный спор</div>
+            <h3>Клиенту отказались возвращать деньги за некачественную услугу</h3>
+            <p>Разобрать документы, подготовить претензию, собрать позицию по спору и довести ситуацию до возврата денег или понятного судебного шага.</p>
+          </article>
+          <article class="case reveal">
+            <div class="case__label">ФССП</div>
+            <h3>Списание и арест, которые нужно оспаривать быстро</h3>
+            <p>Сайт должен показывать, что это не “юридическая теория”, а практическая работа с ограничениями, жалобами и снятием давления.</p>
+          </article>
+          <article class="case reveal">
+            <div class="case__label">Недвижимость и земля</div>
+            <h3>Оформление права, границы, сделка или спор по объекту</h3>
+            <p>Не общий рассказ про недвижимость, а спокойный блок про объекты, право собственности, землю и реальный имущественный риск.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section--soft" id="faq">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">FAQ</p>
+            <h2 class="section-title">Частые вопросы до первого обращения</h2>
+          </div>
+          <p class="section-text">
+            Этот блок нужен, чтобы снять барьер перед обращением и перевести человека из тревоги в понятный следующий шаг.
+          </p>
+        </div>
+        <div class="faq">
+          <details class="reveal">
+            <summary>Когда достаточно консультации, а когда уже нужно ведение дела?</summary>
+            <p>Если вопрос можно решить одним документом, правовой оценкой или разбором позиции, достаточно точечной помощи. Если спор развивается и требует последовательных шагов, логичнее полное сопровождение.</p>
+          </details>
+          <details class="reveal">
+            <summary>Можно ли обратиться, если я уже работаю с другим юристом?</summary>
+            <p>Да. Второе мнение по делу — нормальный запрос, особенно если есть сомнения в стратегии, документах или темпе работы.</p>
+          </details>
+          <details class="reveal">
+            <summary>Можно ли начать с одного документа, а потом перейти к полному сопровождению?</summary>
+            <p>Да, и в этом как раз одна из сильных сторон такой практики. Вход может быть с малого шага, а дальше формат можно расширить по ситуации.</p>
+          </details>
+          <details class="reveal">
+            <summary>Что подготовить к первому разговору?</summary>
+            <p>Краткое описание ситуации, переписку, договоры, претензии, постановления, квитанции или другие ключевые документы, которые уже есть на руках.</p>
+          </details>
+          <details class="reveal">
+            <summary>Можно ли работать дистанционно?</summary>
+            <p>Да. Для многих консультационных и документарных задач дистанционный формат подходит нормально, а детали процесса зависят от типа спора.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <div class="shell">
+        <div class="final-cta reveal">
+          <div class="final-cta__grid">
+            <div>
+              <p class="section-kicker">Финальный экран</p>
+              <h2>Если ситуация уже есть, не нужно разбираться в ней в одиночку.</h2>
+              <p>
+                Это место для формы, мессенджеров и короткого следующего шага:
+                опишите вопрос, и Сева скажет, с чего лучше начать.
+              </p>
+            </div>
+            <div class="final-cta__actions">
+              <a class="button" href="tel:+79030697788">Позвонить сейчас</a>
+              <a class="button button--ghost" href="mailto:mail@law-gorbunov.ru">Написать на почту</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell site-footer__row">
+      <div class="footer-note">Визуальный прототип лендинга. Следующий шаг — адаптация под Tilda и финальные тексты.</div>
+      <div class="footer-note">Концепция: редакционная частная практика, без шаблонного черно-золотого “юридического” стиля.</div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById("site-header");
+    const reveals = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    reveals.forEach((element, index) => {
+      if (!element.classList.contains("is-visible")) {
+        element.style.transitionDelay = `${Math.min(index * 35, 240)}ms`;
+      }
+      revealObserver.observe(element);
+    });
+
+    const syncHeader = () => {
+      if (window.scrollY > 18) {
+        header.classList.add("is-scrolled");
+      } else {
+        header.classList.remove("is-scrolled");
+      }
+    };
+
+    syncHeader();
+    window.addEventListener("scroll", syncHeader, { passive: true });
+  </script>
+</body>
+</html>

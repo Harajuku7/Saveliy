@@ -210,6 +210,13 @@
       flex: 0 0 auto;
     }
 
+    .eyebrow__mobile,
+    .hero__title-mobile,
+    .hero__lead-mobile,
+    .hero__quick {
+      display: none;
+    }
+
     .hero h1 {
       margin: 0;
       font-family: "Cormorant Garamond", Georgia, serif;
@@ -1084,6 +1091,43 @@
       .contact-card strong { overflow-wrap: anywhere; }
     }
 
+    @media (max-width: 680px) {
+      .eyebrow__full,
+      .hero__title-main,
+      .hero__lead-main {
+        display: none;
+      }
+
+      .eyebrow__mobile,
+      .hero__title-mobile,
+      .hero__lead-mobile {
+        display: inline;
+      }
+
+      .eyebrow {
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 10.8vw, 2.7rem);
+        max-width: 8.8ch;
+      }
+
+      .hero__lead {
+        font-size: 0.95rem;
+        max-width: 19rem;
+      }
+
+      .hero__note {
+        display: none;
+      }
+
+      .hero__quick {
+        display: flex;
+      }
+    }
+
     @media (max-width: 560px) {
       .shell { width: min(calc(100% - 24px), var(--max)); }
       section { padding: 18px 0; }
@@ -1254,6 +1298,25 @@
       margin-top: 16px;
       color: var(--olive);
       font-size: 0.98rem;
+    }
+
+    .hero__quick {
+      margin-top: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero__quick span {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(35, 35, 35, 0.08);
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.15;
+      white-space: nowrap;
     }
 
     .trust-strip {
@@ -1466,14 +1529,28 @@
         <section class="hero shell" id="top">
       <div class="hero__grid">
         <div class="reveal is-visible">
-          <div class="eyebrow">Гражданские и уголовные дела, споры по недвижимости и земле</div>
-          <h1>Частный юрист по гражданско-правовым и уголовным делам.</h1>
-          <p class="hero__lead">Консультации, документы и полное ведение дела. Договоры, потребительские споры, ДТП, приставы, земля и недвижимость.</p>
+          <div class="eyebrow">
+            <span class="eyebrow__full">Гражданские и уголовные дела, споры по недвижимости и земле</span>
+            <span class="eyebrow__mobile">Гражданские и уголовные дела</span>
+          </div>
+          <h1>
+            <span class="hero__title-main">Частный юрист по гражданско-правовым и уголовным делам.</span>
+            <span class="hero__title-mobile">Частный юрист по гражданским и уголовным делам.</span>
+          </h1>
+          <p class="hero__lead">
+            <span class="hero__lead-main">Консультации, документы и полное ведение дела. Договоры, потребительские споры, ДТП, приставы, земля и недвижимость.</span>
+            <span class="hero__lead-mobile">Консультация, документ или ведение дела. Без помощников и лишнего сопровождения.</span>
+          </p>
           <div class="hero__actions">
             <a class="button" href="#final">Разобрать ситуацию</a>
             <a class="button button--ghost" href="#practice">Посмотреть направления практики</a>
           </div>
           <p class="hero__note">Работаю лично, без передачи вопроса “куда-то дальше”.</p>
+          <div class="hero__quick" aria-label="Коротко о формате работы">
+            <span>Лично</span>
+            <span>Без помощников</span>
+            <span>От консультации до дела</span>
+          </div>
           <div class="hero__meta">
             <div class="hero__pill">Можно начать с одной консультации и не брать лишнее сопровождение.</div>
             <div class="hero__pill">Если нужен только документ, не навязываю ведение дела.</div>

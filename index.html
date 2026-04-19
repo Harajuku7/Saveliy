@@ -170,6 +170,7 @@
     }
 
     main { overflow: clip; }
+    section[id] { scroll-margin-top: calc(var(--header) + 18px); }
 
     .hero {
       min-height: calc(100svh - var(--header));
@@ -940,11 +941,62 @@
 
     @media (max-width: 820px) {
       :root { --header: 76px; }
+      section { padding: 24px 0; }
       .nav { min-height: var(--header); }
       .nav__links,
       .nav__phone,
       .nav__cta { display: none; }
       .nav__toggle { display: inline-grid; place-items: center; }
+      .hero {
+        min-height: auto;
+        padding: 14px 0 32px;
+        align-items: start;
+      }
+      .hero__grid { gap: 24px; }
+      .hero__visual {
+        order: 0;
+        min-height: auto;
+      }
+      .hero__shape {
+        position: relative;
+        inset: auto;
+        min-height: 0;
+        aspect-ratio: 0.92;
+        border-radius: 30px;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        margin-bottom: 16px;
+        padding: 9px 12px;
+        font-size: 0.75rem;
+        line-height: 1.28;
+        letter-spacing: 0.1em;
+      }
+      .hero h1 {
+        max-width: 11ch;
+        font-size: clamp(2.35rem, 10vw, 3.35rem);
+      }
+      .hero__lead {
+        margin-top: 16px;
+        font-size: 1rem;
+        max-width: 28rem;
+      }
+      .hero__actions {
+        margin-top: 22px;
+        gap: 12px;
+      }
+      .hero__note {
+        margin-top: 14px;
+        font-size: 0.94rem;
+      }
+      .hero__meta { display: none; }
+      .section-head { margin-bottom: 24px; }
+      .section-title {
+        max-width: 13ch;
+        font-size: clamp(1.95rem, 7.8vw, 2.8rem);
+        line-height: 0.98;
+      }
       .hero__meta,
       .scenarios,
       .formats,
@@ -956,18 +1008,80 @@
       .contact-grid,
       .contact-form__grid,
       .trust-strip { grid-template-columns: 1fr; }
+      .panel-shell,
+      .final-cta { padding: 26px; }
+      .panel-shell--trust { padding: 18px 22px; }
+      .panel-shell::after {
+        width: 180px;
+        height: 180px;
+      }
+      .scenario,
+      .practice-card,
+      .case,
+      .quote-card,
+      .contact-card { padding: 20px; }
+      .format,
+      .about__facts { padding: 24px; }
+      .format,
+      .practice-card { min-height: auto; }
+      .practice-card__top { margin-bottom: 18px; }
+      .letter-card__content { padding: 20px; }
       .letter-card a { grid-template-columns: 1fr; }
-      .letter-card__thumb { min-height: 260px; }
-      .hero__visual { min-height: 500px; }
-      .hero__shape { inset: 0; }
+      .letter-card__thumb { min-height: 220px; }
+      .about { gap: 18px; }
+      .about__portrait {
+        min-height: 340px;
+        background-position: center 14%;
+      }
       .trust-strip {
         gap: 10px;
+        padding: 0;
       }
+      .trust-strip__item { padding: 14px 0; }
       .trust-strip__item + .trust-strip__item {
         border-left: 0;
         border-top: 1px solid rgba(35, 35, 35, 0.10);
       }
-      .final-cta__actions { padding-left: 0; }
+      .process__aside { padding-bottom: 18px; }
+      .step {
+        grid-template-columns: 64px 1fr;
+        gap: 14px;
+        padding: 20px;
+      }
+      .step__index {
+        width: 48px;
+        height: 48px;
+        font-size: 0.95rem;
+      }
+      .social-proof__intro { max-width: 34rem; }
+      .final-cta__grid { gap: 20px; }
+      .final-cta h2 {
+        max-width: none;
+        font-size: clamp(2rem, 8.4vw, 3rem);
+      }
+      .final-cta__lead { gap: 14px; }
+      .final-cta__micro { display: none; }
+      .final-cta__micro span {
+        padding: 9px 12px;
+        font-size: 0.88rem;
+      }
+      .final-cta__actions {
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .final-cta__panel { order: 1; }
+      .final-cta__actions { order: 2; }
+      .final-cta__panel { padding: 18px; }
+      .contact-form__row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .contact-form__note {
+        max-width: none;
+        font-size: 0.94rem;
+      }
+      .contact-card strong { overflow-wrap: anywhere; }
     }
 
     @media (max-width: 560px) {
@@ -976,13 +1090,76 @@
       .panel-shell,
       .final-cta { padding: 24px; }
       .brand__name { font-size: 1.7rem; }
-      .hero { padding-top: 16px; }
-      .hero__visual { min-height: 420px; }
-      .hero__shape { position: relative; inset: auto; min-height: 340px; }
+      .brand__tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+      }
+      .hero {
+        padding-top: 10px;
+        padding-bottom: 26px;
+      }
+      .hero__grid { gap: 18px; }
+      .hero__actions,
+      .final-cta__actions {
+        align-items: flex-start;
+      }
+      .hero__shape {
+        max-width: none;
+        min-height: 0;
+        aspect-ratio: 0.9;
+        border-radius: 26px;
+      }
+      .hero h1 {
+        font-size: clamp(2.15rem, 11.5vw, 2.9rem);
+        max-width: 10ch;
+      }
+      .eyebrow { white-space: normal; }
+      .hero__actions { gap: 10px; }
+      .hero__actions .button--ghost,
+      .final-cta__actions .button--ghost {
+        width: auto;
+        min-height: auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        box-shadow: none;
+      }
+      .hero__actions .button--ghost:hover,
+      .hero__actions .button--ghost:focus-visible,
+      .final-cta__actions .button--ghost:hover,
+      .final-cta__actions .button--ghost:focus-visible {
+        background: transparent;
+        color: var(--text);
+        transform: none;
+        box-shadow: none;
+      }
+      .letter-card a {
+        grid-template-columns: 92px 1fr;
+        align-items: start;
+      }
+      .letter-card__content { gap: 8px; }
       .step { grid-template-columns: 1fr; }
       .about__facts,
       .final-cta,
       .contact-form { padding: 26px; }
+      .about__portrait { min-height: 280px; }
+      .section-title { max-width: none; }
+      .quote-card__body { font-size: 0.98rem; }
+      .letter-card__thumb {
+        min-height: 128px;
+        border-radius: 18px;
+        margin: 14px 0 0 14px;
+      }
+      .contact-grid--final .contact-card { grid-template-rows: auto auto auto; }
+      .site-footer__row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
       .button { width: 100%; }
       .hero h1,
       .section-title,
@@ -1376,13 +1553,13 @@
           </article>
           <article class="practice-card reveal">
             <div class="practice-card__top">03</div>
-            <h3>Уголовные дела</h3>
-            <p>Правовая помощь на всех стадиях уголовного дела: от консультации и выработки позиции до защиты на следствии и в суде.</p>
+            <h3>ДТП и страховые вопросы</h3>
+            <p>ОСАГО, КАСКО, заниженные выплаты, постановления и административные решения.</p>
           </article>
           <article class="practice-card reveal">
             <div class="practice-card__top">04</div>
-            <h3>Споры с приставами</h3>
-            <p>Аресты, списания, ограничения, жалобы и обжалование действий ФССП.</p>
+            <h3>Уголовные дела</h3>
+            <p>Правовая помощь на всех стадиях уголовного дела: от консультации и выработки позиции до защиты на следствии и в суде.</p>
           </article>
           <article class="practice-card reveal">
             <div class="practice-card__top">05</div>
